@@ -1,0 +1,41 @@
+EcoServants® Project Cleanup Software Redistribution License
+Version 1.0 – March 2025
+
+Copyright (c) 2025 Ecological Servants Project (EcoServants®)
+All rights reserved.
+
+This software, known as EcoServants CSR, was developed exclusively by the Ecological Servants Project in collaboration with its interns under a binding Non-Disclosure Agreement (NDA). All source code, assets, and documentation are the intellectual property of the Ecological Servants Project and are protected by applicable copyright and trademark laws. 
+
+Authorized Use:
+
+This software is designed specifically for nonprofit and charitable organizations engaged in environmental cleanups. Its core purpose is to track cleanup efforts, items removed, and impact metrics.
+
+Use of this software is granted under the following conditions:
+
+1. Internal Use by EcoServants®:
+   EcoServants and its internal programs have unrestricted use of the software.
+
+2. Redistribution License for Other Organizations:
+   - Redistribution and usage by other environmental charities or nonprofit organizations is permitted only with a valid license agreement.
+   - A $5,000 consultancy and initial distribution fee is required. This supports our Green Infrastructure & Technology Internship Program.
+   - This license grants non-exclusive, non-transferable rights to use the software for mission-aligned purposes only.
+   - Modification of the source code is permitted only for internal organizational use. Redistribution of modified versions is prohibited.
+
+3. Prohibited Uses:
+   - Commercial resale or sublicensing of the software is strictly forbidden.
+   - Use of the software by for-profit organizations is not authorized under this license.
+   - Sharing the software or its components outside the licensed organization is prohibited.
+
+4. Attribution:
+   Any public use or publication of work derived from this software must acknowledge:
+   "Powered by EcoServants® CSR."
+
+5. No Warranty:
+   This software is provided "as is" without warranty of any kind. The Ecological Servants Project is not liable for any damages or losses resulting from its use.
+
+6. Support:
+   Technical assistance is provided only to licensed organizations through the EcoServants consulting program.
+
+For licensing inquiries, redistribution approval, or consulting support, please contact:
+📧 submissions@ecoservantsproject.org
+🌐 https://ecoservantsproject.org

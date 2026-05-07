@@ -1,0 +1,832 @@
+/* CSR Form Styling */
+form {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="date"],
+form input[type="number"],
+form input[type="file"],
+form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+form textarea {
+    resize: vertical;
+}
+
+form fieldset {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    background: #fff;
+}
+
+form fieldset legend {
+    font-weight: bold;
+    color: #000;
+    padding: 0 10px;
+}
+
+form button {
+    background: #243b7e;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background: #1c2f66;
+}
+
+form small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+}
+
+/* Checkbox and Subcategory Styling */
+form fieldset label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+form fieldset label input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+form fieldset label input[type="number"] {
+    margin-left: auto;
+    width: 80px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Mobile Responsiveness for CSR Form */
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+    }
+
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="date"],
+    form input[type="number"],
+    form textarea {
+        font-size: 14px;
+    }
+
+    form button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    form fieldset label {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    form fieldset label input[type="number"] {
+        margin-left: 0;
+        margin-top: 5px;
+        width: 100%;
+    }
+}
+
+/* CSR Form Heading Styling */
+.csr-form-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #243b7e;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Wall of Fame Section */
+.wall-of-fame {
+    background: #f4f7fb;
+    padding: 40px 0;
+    border-radius: 24px;
+    max-width: 1300px;
+    margin: 40px auto;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    border: 2px solid #243b7e;
+    box-shadow: 0 8px 32px rgba(36,59,126,0.08);
+    position: relative;
+}
+
+.wall-of-fame h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #243b7e;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Wall of Fame Entry Styling */
+.wall-of-fame-entry {
+    display: inline-block;
+    width: calc(33.333% - 20px);
+    margin: 10px;
+    vertical-align: top;
+}
+
+.wall-of-fame-entry .card {
+    background: linear-gradient(135deg, #e3eafc 60%, #c5cae9 100%) !important;
+    padding: 28px 22px 22px 22px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(36,59,126,0.10);
+    border: 2.5px solid #243b7e;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.wall-of-fame-entry .card:hover {
+    transform: translateY(-7px) scale(1.03);
+    box-shadow: 0 16px 32px rgba(36,59,126,0.18);
+}
+
+.wall-of-fame-entry .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    z-index: 0;
+    pointer-events: none;
+}
+
+.wall-of-fame-entry h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #243b7e;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+}
+
+.wall-of-fame-entry .location {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+}
+
+.wall-of-fame-entry .total-weight {
+    font-size: 18px;
+    font-weight: bold;
+    color: #388e3c;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+}
+
+.wall-of-fame-entry .total-weight span {
+    background: #e8f5e9;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #388e3c;
+}
+
+.wall-of-fame-entry .highlight {
+    background: #243b7e;
+    padding: 12px 10px;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    margin-top: 18px;
+    z-index: 1;
+    position: relative;
+    font-size: 1.08rem;
+    letter-spacing: 0.5px;
+    border: 1.5px solid #243b7e;
+    box-shadow: 0 2px 8px rgba(36,59,126,0.10);
+}
+
+/* Wall of Fame Photo Styling */
+.wall-of-fame .photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.wall-of-fame-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wall-of-fame-photo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Pagination Styling */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 8px 12px;
+    border: 1px solid #243b7e;
+    border-radius: 5px;
+    color: #243b7e;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #243b7e;
+    color: #fff;
+}
+
+.pagination .current {
+    background-color: #243b7e;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Wall of Fame Carousel */
+.wall-of-fame-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 32px;
+    padding: 20px 10px;
+    margin: 0;
+    border-radius: 14px;
+    background: #f4f7fb;
+    border: 1px solid #243b7e;
+    box-shadow: 0 2px 8px rgba(36,59,126,0.04), 0 8px 32px rgba(36,59,126,0.08);
+    justify-content: center;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #243b7e #e3eafc;
+    /* Hide default scrollbar for overlay effect */
+    overflow-x: auto;
+    overflow-y: visible;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.wall-of-fame-carousel::-webkit-scrollbar {
+    height: 10px;
+    background: transparent;
+    transition: opacity 0.2s;
+    opacity: 0;
+}
+.wall-of-fame-carousel:hover::-webkit-scrollbar,
+.wall-of-fame-carousel:focus-within::-webkit-scrollbar {
+    opacity: 1;
+}
+.wall-of-fame-carousel::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #243b7e 60%, #243b7e 100%);
+    border-radius: 8px;
+    border: 2px solid #e3eafc;
+    min-width: 40px;
+    transition: background 0.2s;
+}
+.wall-of-fame-carousel::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #243b7e 60%, #243b7e 100%);
+}
+.wall-of-fame-carousel::-webkit-scrollbar-track {
+    background: #e3eafc;
+    border-radius: 8px;
+}
+
+/* Top scrollbar overlay effect */
+.wall-of-fame-carousel::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -18px;
+    left: 0;
+    right: 0;
+    height: 16px;
+    background: transparent;
+    pointer-events: none;
+    z-index: 2;
+}
+.wall-of-fame-carousel::-webkit-scrollbar {
+    position: absolute;
+    top: -18px;
+}
+
+/* Pop-up effect for entries */
+.wall-of-fame-entry {
+    /* ...existing code... */
+    transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+}
+.wall-of-fame-entry:hover, .wall-of-fame-entry:focus-within {
+    transform: translateY(-8px) scale(1.04);
+    z-index: 2;
+    box-shadow: 0 12px 32px rgba(36,59,126,0.18), 0 2px 8px rgba(36,59,126,0.10);
+}
+
+/* Mobile Responsiveness for Wall of Fame */
+@media (max-width: 1100px) {
+    .wall-of-fame-entry {
+        flex: 0 0 90vw;
+        max-width: 98vw;
+        min-width: 220px;
+    }
+    .wall-of-fame-carousel {
+        gap: 16px;
+        padding: 10px 2px;
+    }
+    .wall-of-fame-container {
+        margin: 0 4px;
+        padding: 10px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .wall-of-fame {
+        padding: 18px 0;
+        border-radius: 12px;
+        margin: 18px auto;
+    }
+    .wall-of-fame-container {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 10px;
+        padding: 6px 0;
+        margin: 0 2px;
+    }
+    .wall-of-fame-carousel {
+        flex-direction: column;
+        overflow-x: visible;
+        gap: 10px;
+        border-radius: 8px;
+        padding: 2px 0;
+    }
+    .wall-of-fame-entry {
+        width: 100% !important;
+        flex: 1 1 100%;
+        margin: 10px 0;
+        max-width: 100vw;
+        min-width: 0;
+    }
+    .wall-of-fame-entry .card {
+        min-height: 0;
+        padding: 18px 8px 12px 8px;
+        border-radius: 8px;
+    }
+    .wall-of-fame .photos {
+        justify-content: flex-start;
+    }
+    .wall-of-fame-photo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+/* Total Impact Metrics Styling */
+.total-impact-metrics {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+.total-impact-metrics h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #243b7e;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.total-impact-metrics ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.total-impact-metrics ul li {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-impact-metrics ul li span {
+    font-weight: bold;
+    color: #000;
+    background: #243b7e;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.total-impact-metrics h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #243b7e;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mobile Responsiveness for Total Impact Metrics */
+@media (max-width: 768px) {
+    .total-impact-metrics {
+        padding: 20px;
+    }
+
+    .total-impact-metrics ul li {
+        font-size: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .total-impact-metrics ul li span {
+        margin-top: 5px;
+    }
+}
+
+/* Collapsible Fieldset */
+.collapsible {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-top: 10px;
+    background: #fff;
+}
+
+.collapsible-header {
+    cursor: pointer;
+    font-weight: bold;
+    color: #000;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collapsible-header:hover {
+    background: #f1f1f1;
+}
+
+.collapsible-content {
+    display: none;
+    padding: 10px;
+}
+
+.collapsible.open .collapsible-content {
+    display: block;
+}
+
+.collapsible.open .toggle-icon {
+    transform: rotate(45deg);
+}
+
+/* Voice Assistant Styles */
+.csr-voice-assistant {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+#csr-voice-btn {
+    background: #388e3c;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+#csr-voice-btn[aria-pressed="true"] {
+    background: #ff9800;
+}
+#csr-voice-btn:focus {
+    outline: 2px solid #243b7e;
+}
+#csr-voice-icon {
+    font-size: 20px;
+}
+.csr-voice-status {
+    font-size: 15px;
+    color: #243b7e;
+    min-width: 120px;
+}
+
+/* Wall of Fame Lightbox Modal */
+#wof-lightbox-modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0; right: 0; bottom: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow: auto; /* Allow scrolling if modal is larger than iframe */
+}
+.wof-lightbox-overlay {
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 1;
+}
+.wof-lightbox-img {
+    position: relative;
+    z-index: 2;
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    background: #fff;
+    max-width: 98vw;
+    max-height: 70vh;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+/* For very small iframes, ensure modal is scrollable */
+@media (max-width: 500px), (max-height: 400px) {
+    #wof-lightbox-modal {
+        padding: 10px;
+    }
+    .wof-lightbox-img {
+        max-width: 100vw;
+        max-height: 50vh;
+    }
+}
+
+.wof-lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 3;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.wof-lightbox-link {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 4;
+    background: #243b7e;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background 0.2s;
+}
+.wof-lightbox-link:hover {
+    background: #1c2f66;
+}
+
+/* Circular Metric Display Styles */
+.csr-circular-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    margin-bottom: 30px;
+    align-items: stretch;
+}
+.csr-circular-metric {
+    flex: 1 1 140px;
+    max-width: 180px;
+    min-width: 120px;
+    height: auto;
+    border-radius: 16px;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    position: relative;
+    margin: 0 14px;
+    transition: transform 0.2s;
+    overflow: visible;
+    padding: 0;
+}
+.csr-circular-metric:hover {
+    transform: scale(1.07);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.csr-circular-svg-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 140px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.csr-circular-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.csr-circular-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* reduced responsive number sizing (visually ~50% smaller than before) */
+    /* min 0.9rem, preferred responsive, max 1.3rem */
+    font-size: clamp(0.9rem, 1.2vw + 0.6rem, 1.3rem);
+    font-weight: bold;
+    color: #111;
+    z-index: 2;
+    text-align: center;
+    line-height: 1.05;
+    white-space: nowrap;
+    max-width: 90%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+.csr-circular-unit {
+    font-size: 0.7em;
+    color: #111;
+    margin-left: 2px;
+}
+.csr-circular-label {
+    margin-top: 12px;
+    font-size: 1.05rem;
+    color: #333;
+    text-align: center;
+    font-weight: 500;
+    padding: 0 8px;
+    min-height: 2.5em;
+    line-height: 1.2;
+    width: 100%;
+    position: static;
+    display: block;
+}
+.csr-circular-svg-wrap + .csr-circular-label {
+    margin-top: 12px;
+}
+.csr-circular-metric .csr-circular-label {
+    position: static !important;
+    display: block !important;
+}
+
+/* Responsive for circular metrics */
+@media (max-width: 768px) {
+    .csr-circular-metrics {
+        gap: 16px;
+    }
+    .csr-circular-metric {
+        min-width: 80px;
+        max-width: 120px;
+        margin: 0 4px;
+    }
+    .csr-circular-svg-wrap {
+        max-width: 100px;
+    }
+    /* much smaller number on small screens to match reduced sizing */
+    .csr-circular-value {
+        font-size: 0.55rem;
+        line-height: 1.02;
+    }
+    .csr-circular-label {
+        font-size: 0.85rem;
+        margin-top: 6px;
+    }
+    .csr-circular-metric .csr-circular-svg {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* "View All" Button Styles */
+.csr-view-all-btn {
+    display: inline-block;
+    background: #243b7e;
+    color: #fff;
+    font-weight: bold;
+    padding: 12px 28px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1.1rem;
+    margin: 20px auto 0 auto;
+    cursor: pointer;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-decoration: none;
+    text-align: center;
+}
+.csr-view-all-btn:hover, .csr-view-all-btn:focus {
+    background: #1c2f66;
+    color: #fff;
+    outline: none;
+}
+
+/* Wall of Fame Shuffle Animations */
+.wof-fade-in {
+    animation: wofFadeIn 0.4s;
+}
+.wof-fade-out {
+    animation: wofFadeOut 0.4s;
+}
+@keyframes wofFadeIn {
+    from { opacity: 0; transform: scale(0.92);}
+    to   { opacity: 1; transform: scale(1);}
+}
+@keyframes wofFadeOut {
+    from { opacity: 1; transform: scale(1);}
+    to   { opacity: 0; transform: scale(0.92);}
+}
+
+/* Stack number over unit inside the circular metric */
+.csr-circular-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+    white-space: normal; /* allow wrapping */
+}
+
+.csr-circular-value .csr-circular-unit {
+    display: block;
+    font-size: 0.6em;
+    margin: 2px 0 0 0; /* remove left margin from old rule */
+}
