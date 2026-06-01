@@ -1,80 +1,89 @@
-EcoServants® Project Cleanup Software Internal Use License
-Version 1.1 – May 2026
+# EcoServants® CSR Software Public-View Internal Use License
 
-Copyright (c) 2025–2026 Ecological Servants Project (EcoServants®)
+Version 1.2 – June 2026
+
+Copyright © 2025–2026 Ecological Servants Project, also known as EcoServants®.
 All rights reserved.
 
-This software, known as EcoServants CSR, was developed exclusively by the Ecological Servants Project in collaboration with its interns, contributors and internal program teams. All source code, assets, documentation, designs, workflows, data structures and related materials are the intellectual property of the Ecological Servants Project and are protected by applicable copyright, trademark and intellectual property laws.
+This software, known as **EcoServants® CSR**, was developed by the Ecological Servants Project in collaboration with its interns, contributors, volunteers, staff, managers, board members, contractors and internal program teams. All source code, assets, documentation, designs, workflows, data structures, user interface concepts, reporting methods and related materials are the intellectual property of the Ecological Servants Project and are protected by applicable copyright, trademark and intellectual property laws.
 
-This software is proprietary and is not open-source.
+This software is **proprietary**. It is **not open-source**.
 
-Authorized Use
+Public visibility of this repository does not grant permission to copy, reuse, redistribute, sublicense, sell, rebrand, commercially deploy or create derivative systems from this software.
 
-1. Internal Use by EcoServants®
+## 1. Authorized Use by EcoServants®
 
-EcoServants® and its authorized internal programs, staff, board members, managers, interns, contractors and approved technical contributors may use, test, develop, maintain and improve this software only for EcoServants® organizational purposes.
+EcoServants® and its authorized internal programs, staff, board members, managers, interns, contractors, volunteers and approved technical contributors may use, test, develop, maintain and improve this software only for EcoServants® organizational purposes.
 
 Authorized internal purposes include, but are not limited to:
 
-- Community Site Report collection
-- Cleanup impact tracking
-- Environmental data reporting
-- Volunteer and corporate cleanup documentation
-- Internal research and analysis
-- Grant reporting and impact measurement
-- EcoServants® technology development, training and internship work
+* Community Site Report collection
+* Cleanup impact tracking
+* Environmental data reporting
+* Volunteer and corporate cleanup documentation
+* Internal research and analysis
+* Grant reporting and impact measurement
+* EcoServants® technology development, training and internship work
+* Public-facing EcoServants® reports, dashboards, portals and impact pages
 
-2. Repository Access
+## 2. Public Repository Visibility
 
-Access to this repository and its contents is limited to authorized EcoServants® personnel and approved contributors.
+This repository may be publicly viewable for transparency, educational review, nonprofit collaboration, intern portfolio reference and authorized contribution to EcoServants® projects.
 
-Access does not grant ownership of the software, permission to redistribute the software, or permission to use the software outside EcoServants® approved activities.
+Public visibility does not grant ownership, license rights or permission to use this software outside EcoServants® approved activities.
 
-3. Confidentiality and Internal Handling
+Viewing, cloning, downloading, forking or accessing this repository does not create any right to use, modify, distribute, publish, host, deploy, resell, sublicense or rebrand the software.
 
-All source code, documentation, data structures, internal workflows, technical plans and related materials must be treated as confidential internal EcoServants® materials.
+## 3. Confidentiality and Internal Handling
 
-Authorized users may not copy, publish, disclose, distribute, transfer, sublicense, sell, share or otherwise make the software or its components available to any outside person, company, organization or public repository without written authorization from EcoServants® leadership.
+Although this repository may be publicly visible, any non-public EcoServants® materials, credentials, private data, internal records, donor information, volunteer information, corporate partner information, unpublished documentation, private technical plans, private communications or restricted organizational workflows must be treated as confidential.
 
-4. Prohibited Uses
+Authorized contributors may not publish, disclose, distribute, transfer, sublicense, sell, share or otherwise make any restricted EcoServants® materials available to any outside person, company or organization without written authorization from EcoServants® leadership.
 
-The following uses are strictly prohibited:
+## 4. Prohibited Uses
 
-- Public redistribution of the software or source code
-- Commercial resale or sublicensing
-- Use by outside organizations without written approval
-- Uploading the software to public repositories
-- Removing EcoServants® ownership notices, copyright notices, branding or attribution
-- Using the software to create a competing product or derivative system outside EcoServants®
-- Sharing internal documentation, technical architecture, data structures or implementation details with unauthorized parties
+The following uses are strictly prohibited without prior written authorization from EcoServants® leadership:
 
-5. Contributions
+* Copying this software for use outside EcoServants®
+* Redistributing the software or source code as a separate product
+* Commercial resale or sublicensing
+* Rebranding the software as another organization’s system
+* Deploying the software for another nonprofit, company, agency or individual
+* Using the software to create a competing product, platform or derivative system
+* Removing EcoServants® ownership notices, copyright notices, branding or attribution
+* Using EcoServants® trademarks, names, logos or branding without permission
+* Sharing restricted internal documentation, technical architecture, data structures or implementation details with unauthorized parties
+* Using this software in any way that misrepresents affiliation with EcoServants®
 
-Any contribution, modification, improvement, design, documentation, code, bug fix, feature, workflow or related work submitted to this project by an intern, staff member, contractor, volunteer or contributor is considered a contribution to the Ecological Servants Project.
+## 5. Contributions
 
-Unless otherwise agreed in writing, all such contributions become part of the EcoServants CSR system and may be used, modified, maintained and incorporated by EcoServants® for its organizational purposes.
+Any contribution, modification, improvement, design, documentation, code, bug fix, feature, workflow, suggestion or related work submitted to this project by an intern, staff member, contractor, volunteer or contributor is considered a contribution to the Ecological Servants Project.
 
-6. Future Licensing
+Unless otherwise agreed in writing, all such contributions become part of the EcoServants® CSR system and may be used, modified, maintained, published, deployed and incorporated by EcoServants® for its organizational purposes.
 
-EcoServants® reserves the right to create separate written license agreements, consulting agreements or partnership agreements for outside organizations in the future.
+By submitting a contribution, the contributor confirms that they have the right to submit the work and that the contribution does not knowingly violate another party’s intellectual property rights.
 
-No outside use, redistribution, deployment or partnership use is authorized unless approved in writing by EcoServants® leadership.
+## 6. Future Licensing
 
-7. Attribution
+EcoServants® reserves the right to create separate written license agreements, consulting agreements, partnership agreements, deployment agreements or commercial-use agreements for outside organizations in the future.
 
-Any approved public-facing deployment, report, display, dashboard, iframe, portal or impact page connected to this software should acknowledge:
+No outside use, redistribution, deployment, hosting, resale, sublicensing, partnership use or derivative use is authorized unless approved in writing by EcoServants® leadership.
 
-Powered by EcoServants® CSR.
+## 7. Attribution
 
-8. No Warranty
+Any approved public-facing deployment, report, display, dashboard, iframe, portal, impact page or related system connected to this software should acknowledge:
 
-This software is provided "as is" without warranty of any kind, express or implied. The Ecological Servants Project is not liable for any damages, losses, data issues, operational interruptions or other consequences resulting from use, testing, modification or deployment of the software.
+**Powered by EcoServants® CSR.**
 
-9. Support
+## 8. No Warranty
+
+This software is provided “as is” without warranty of any kind, express or implied. The Ecological Servants Project is not liable for any damages, losses, data issues, operational interruptions, security issues, compliance issues or other consequences resulting from use, testing, modification, deployment or attempted use of the software.
+
+## 9. Support
 
 Technical support, maintenance and development guidance are provided only through authorized EcoServants® internal channels or approved written agreements.
 
-For internal questions, authorization requests, licensing inquiries or partnership discussions, please contact:
+For authorization requests, licensing inquiries, partnership discussions or approved-use questions, please contact:
 
-corporate.engagement@ecoservantsproject.org
+[corporate.engagement@ecoservantsproject.org](mailto:corporate.engagement@ecoservantsproject.org)
 https://ecoservantsproject.org
