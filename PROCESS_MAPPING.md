@@ -17,6 +17,8 @@ This document maps the proposed future user flow. It shows:
 
 **Goal:** Transform from a single long form into a guided, step-by-step experience.
 
+Where possible, this process map uses the current `csr_*` backend field names to preserve compatibility with the existing submission handler and data model.
+
 > Note: Screen labels and counts are illustrative. The actual form may use a slightly different number of steps depending on the final UX implementation.
 
 ---
@@ -25,10 +27,10 @@ This document maps the proposed future user flow. It shows:
 
 | Step | Question/Purpose | Input Type | Data Collected | Next Step |
 |--------|-----------------|-----------|-----------------|------------|
-| **1** | "Welcome! Are you submitting alone or as part of a team/organization?" | Radio buttons | `submission_type: individual OR team` | Step 2 |
-| **2** | "What's your name?" | Text input | `volunteer_name` | Step 3 |
-| **3** | "What's your email?" | Email input | `volunteer_email` | Step 4 |
-| **4** | "When did this cleanup happen? Where was it?" | Date picker + Location text | `cleanup_date`, `cleanup_location` | Step 5 |
+| **1** | "Welcome! Are you submitting alone or as part of a team/organization?" | Radio buttons | New metadata field: `csr_submission_type` (individual/team) | Step 2 |
+| **2** | "What's your name?" | Text input | `csr_name` | Step 3 |
+| **3** | "What's your email?" | Email input | `csr_email` | Step 4 |
+| **4** | "When did this cleanup happen? Where was it?" | Date picker + Location text | `csr_date`, `csr_location` | Step 5 |
 
 ---
 
@@ -54,8 +56,8 @@ After basic info, user sees a **category card menu** with all waste types availa
 
 | Step | Purpose | UI Element | Data Collected | Next Step |
 |--------|---------|-----------|-----------------|------------|
-| **5** | "What types of waste did you collect? (Select as many as apply)" | Category card grid | `selected_waste_categories[]` | Step 6 |
-| **6–19** | For *each* selected category, ask subcategory + weight | Pinwheel selector + weight input | `category_subcategories[]`, `category_weight` | Next category step or Step 20 |
+| **5** | "What types of waste did you collect? (Select as many as apply)" | Category card grid | UI selection to reveal existing fields such as `csr_<category>_waste_weight`, `csr_<category>_subcategories[]`, `csr_<category>_subcategories_count[...]` | Step 6 |
+| **6–19** | For *each* selected category, ask subcategory + weight | Pinwheel selector + weight input | Existing category-specific fields: `csr_plastic_waste_weight`, `csr_plastic_subcategories[]`, `csr_plastic_subcategories_count[...]`, etc. | Next category step or Step 20 |
 | **20** | Summary of all waste data collected | Review card | None (just display) | Step 21 |
 
 ### Example: Entering Plastic Waste (Step 6)
@@ -80,11 +82,11 @@ After all waste categories are complete, ask about restoration work.
 
 | Step | Question | Input Type | Data Collected | Next Step |
 |--------|----------|-----------|-----------------|------------|
-| **21** | "Did you do any habitat restoration work?" | Yes/No toggle | `did_restoration` | If Yes → 22, If No → 26 |
-| **22** | "How many trees did you plant?" | Number input | `trees_planted` | Step 23 |
-| **23** | "Did you remove invasive species? How many sq ft?" | Yes/No + Number | `invasive_removed_sqft` | Step 24 |
-| **24** | "What invasive species? How much did you collect (lbs)?" | Text + Number | `invasive_names`, `invasive_weight` | Step 25 |
-| **25** | "What erosion control methods did you use?" | Checkboxes | `erosion_methods[]` | Step 26 |
+| **21** | "Did you do any habitat restoration work?" | Yes/No toggle | UI branch to existing restoration fields (`csr_trees_planted`, `csr_invasive_species_removed`, `csr_invasive_species_names`, `csr_invasive_species_weight`, `csr_native_plants_seeded`, `csr_erosion_control_methods[]`) | If Yes → 22, If No → 26 |
+| **22** | "How many trees did you plant?" | Number input | `csr_trees_planted` | Step 23 |
+| **23** | "Did you remove invasive species? How many sq ft?" | Yes/No + Number | `csr_invasive_species_removed` | Step 24 |
+| **24** | "What invasive species? How much did you collect (lbs)?" | Text + Number | `csr_invasive_species_names`, `csr_invasive_species_weight` | Step 25 |
+| **25** | "What erosion control methods did you use?" | Checkboxes | `csr_erosion_control_methods[]` | Step 26 |
 
 ---
 
@@ -92,8 +94,8 @@ After all waste categories are complete, ask about restoration work.
 
 | Step | Question | Input Type | Data Collected | Next Step |
 |--------|----------|-----------|-----------------|------------|
-| **26** | "How many volunteers were involved?" | Number input | `total_volunteers` | Step 27 |
-| **27** | "Any notes or photos from this cleanup?" | Textarea + File upload | `notes`, `uploaded_photos[]` | Step 28 |
+| **26** | "How many volunteers were involved?" | Number input | `csr_volunteers_involved` | Step 27 |
+| **27** | "Any notes or photos from this cleanup?" | Textarea + File upload | `csr_notes`, `csr_photos[]` | Step 28 |
 
 ---
 
