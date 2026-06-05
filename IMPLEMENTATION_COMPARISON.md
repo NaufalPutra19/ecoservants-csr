@@ -117,6 +117,17 @@
 - `corporate_purpose` / `cleanup_goal` / `impact_goal`
 - `corporate_reporting_notes`
 
+### Proposed `csr_*` equivalents (future / optional)
+
+- `csr_submission_type` (maps to `submission_type`)
+- `csr_team_name` (maps to `team_name` / `organization_name`)
+- `csr_team_lead_name` (maps to `team_lead_name`)
+- `csr_team_lead_email` (maps to `team_lead_email`)
+- `csr_team_size` (maps to `team_size`)
+- `csr_corporate_reporting_notes` (maps to `corporate_reporting_notes`)
+
+Note: These `csr_*` fields are for future planning and should be added only after confirming storage, display, and reporting needs. Keep the initial guided-wrapper implementation using existing `csr_*` fields only.
+
 ### Existing field alignment
 - `csr_volunteers_involved` already exists and can support team size
 - existing waste and restoration fields can be reused for both paths
