@@ -32,23 +32,54 @@ function ecoservants_handle_csr_form() {
         $food_waste_weight = floatval($_POST['csr_food_waste_weight']);
         $food_subcategories = isset($_POST['csr_food_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_food_subcategories'])) : '';
         $food_subcategories_count = isset($_POST['csr_food_subcategories_count']) ? array_map('intval', $_POST['csr_food_subcategories_count']) : [];
+
+        // --- FIX (#4): the six fields below previously saved counts only and
+        // silently dropped the subcategory label checkboxes the browser sent.
+        // Now captured the same way as plastic/paper/metal/glass/food above.
         $cigarette_litter_weight = floatval($_POST['csr_cigarette_litter_weight']);
+        $cigarette_subcategories = isset($_POST['csr_cigarette_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_cigarette_subcategories'])) : '';
         $cigarette_subcategories_count = isset($_POST['csr_cigarette_subcategories_count']) ? array_map('intval', $_POST['csr_cigarette_subcategories_count']) : [];
+
         $textiles_weight = floatval($_POST['csr_textiles_weight']);
+        $textiles_subcategories = isset($_POST['csr_textiles_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_textiles_subcategories'])) : '';
         $textiles_subcategories_count = isset($_POST['csr_textiles_subcategories_count']) ? array_map('intval', $_POST['csr_textiles_subcategories_count']) : [];
+
         $medical_waste_weight = floatval($_POST['csr_medical_waste_weight']);
+        $medical_subcategories = isset($_POST['csr_medical_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_medical_subcategories'])) : '';
         $medical_subcategories_count = isset($_POST['csr_medical_subcategories_count']) ? array_map('intval', $_POST['csr_medical_subcategories_count']) : [];
+
         $sanitary_products_weight = floatval($_POST['csr_sanitary_products_weight']);
+        $sanitary_subcategories = isset($_POST['csr_sanitary_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_sanitary_subcategories'])) : '';
         $sanitary_subcategories_count = isset($_POST['csr_sanitary_subcategories_count']) ? array_map('intval', $_POST['csr_sanitary_subcategories_count']) : [];
+
         $fishing_gear_weight = floatval($_POST['csr_fishing_gear_weight']);
+        $fishing_subcategories = isset($_POST['csr_fishing_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_fishing_subcategories'])) : '';
         $fishing_subcategories_count = isset($_POST['csr_fishing_subcategories_count']) ? array_map('intval', $_POST['csr_fishing_subcategories_count']) : [];
+
         $styrofoam_hazardous_waste_weight = floatval($_POST['csr_styrofoam_hazardous_waste_weight']);
+        $styrofoam_subcategories = isset($_POST['csr_styrofoam_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_styrofoam_subcategories'])) : '';
         $styrofoam_subcategories_count = isset($_POST['csr_styrofoam_subcategories_count']) ? array_map('intval', $_POST['csr_styrofoam_subcategories_count']) : [];
+
+        // --- FIX (#4): hazardous subcategories were rendered in the form and
+        // submitted by the browser but never read/saved at all. Now captured.
+        $hazardous_subcategories = isset($_POST['csr_hazardous_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_hazardous_subcategories'])) : '';
+        $hazardous_subcategories_count = isset($_POST['csr_hazardous_subcategories_count']) ? array_map('intval', $_POST['csr_hazardous_subcategories_count']) : [];
+
         $miscellaneous_weight = floatval($_POST['csr_miscellaneous_weight']);
+        $miscellaneous_subcategories = isset($_POST['csr_miscellaneous_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_miscellaneous_subcategories'])) : '';
         $miscellaneous_subcategories_count = isset($_POST['csr_miscellaneous_subcategories_count']) ? array_map('intval', $_POST['csr_miscellaneous_subcategories_count']) : [];
+
         $derelict_items_weight = floatval($_POST['csr_derelict_items_weight']);
+        $derelict_subcategories = isset($_POST['csr_derelict_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_derelict_subcategories'])) : '';
         $derelict_subcategories_count = isset($_POST['csr_derelict_subcategories_count']) ? array_map('intval', $_POST['csr_derelict_subcategories_count']) : [];
-        $notes = sanitize_textarea_field($_POST['csr_notes']);
+
+        // --- FIX (#4): csr_notes was read without isset(), causing a PHP
+        // warning on every submission since no matching field exists in the
+        // current template. Guarded here; template fix (adding the actual
+        // textarea) is tracked separately so this handler doesn't silently
+        // eat real notes once the field is added.
+        $notes = isset($_POST['csr_notes']) ? sanitize_textarea_field($_POST['csr_notes']) : '';
+
         $trees_planted = intval($_POST['csr_trees_planted']);
         $invasive_species_removed = intval($_POST['csr_invasive_species_removed']);
         $native_plants_seeded = sanitize_text_field($_POST['csr_native_plants_seeded']);
@@ -113,21 +144,36 @@ function ecoservants_handle_csr_form() {
             'csr_food_waste_weight' => $food_waste_weight,
             'csr_food_subcategories' => $food_subcategories,
             'csr_food_subcategories_count' => json_encode($food_subcategories_count),
+
+            // FIX (#4): subcategory label arrays now saved, not just counts
             'csr_cigarette_litter_weight' => $cigarette_litter_weight,
+            'csr_cigarette_subcategories' => $cigarette_subcategories,
             'csr_cigarette_subcategories_count' => json_encode($cigarette_subcategories_count),
             'csr_textiles_weight' => $textiles_weight,
+            'csr_textiles_subcategories' => $textiles_subcategories,
             'csr_textiles_subcategories_count' => json_encode($textiles_subcategories_count),
             'csr_medical_waste_weight' => $medical_waste_weight,
+            'csr_medical_subcategories' => $medical_subcategories,
             'csr_medical_subcategories_count' => json_encode($medical_subcategories_count),
             'csr_sanitary_products_weight' => $sanitary_products_weight,
+            'csr_sanitary_subcategories' => $sanitary_subcategories,
             'csr_sanitary_subcategories_count' => json_encode($sanitary_subcategories_count),
             'csr_fishing_gear_weight' => $fishing_gear_weight,
+            'csr_fishing_subcategories' => $fishing_subcategories,
             'csr_fishing_subcategories_count' => json_encode($fishing_subcategories_count),
             'csr_styrofoam_hazardous_waste_weight' => $styrofoam_hazardous_waste_weight,
+            'csr_styrofoam_subcategories' => $styrofoam_subcategories,
             'csr_styrofoam_subcategories_count' => json_encode($styrofoam_subcategories_count),
+
+            // FIX (#4): hazardous subcategories now saved (previously dropped entirely)
+            'csr_hazardous_subcategories' => $hazardous_subcategories,
+            'csr_hazardous_subcategories_count' => json_encode($hazardous_subcategories_count),
+
             'csr_miscellaneous_weight' => $miscellaneous_weight,
+            'csr_miscellaneous_subcategories' => $miscellaneous_subcategories,
             'csr_miscellaneous_subcategories_count' => json_encode($miscellaneous_subcategories_count),
             'csr_derelict_items_weight' => $derelict_items_weight,
+            'csr_derelict_subcategories' => $derelict_subcategories,
             'csr_derelict_subcategories_count' => json_encode($derelict_subcategories_count),
             'csr_notes' => $notes,
             'csr_photos' => !empty($uploaded_photos) ? implode(',', $uploaded_photos) : '',
