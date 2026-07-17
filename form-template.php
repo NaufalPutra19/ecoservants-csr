@@ -731,5 +731,5 @@
 </div>
 <!-- Voice Assistant JS -->
 <script src="<?php echo plugin_dir_url(__FILE__); ?>assets/js/ecoservants-csr.js"></script>
-<!-- Guided Wrapper JS (Issue #6) -->
-<script src="<?php echo plugin_dir_url(__FILE__); ?>assets/js/csr-guided-wrapper.js"></script>
+<!-- csr-guided-wrapper.js is enqueued in ecoservants-csr.php via ecoservants_enqueue_scripts(),
+     not included directly here, so it loads once and only on pages where the form actually renders. -->
