@@ -10,6 +10,9 @@
     <form class="csr-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data">
         <?php wp_nonce_field('csr_form_nonce', 'csr_form_nonce_field'); ?>
         <input type="hidden" name="action" value="csr_form">
+
+        <!-- Step 1 (Issue #6): Basic Info -->
+        <div class="csr-step" data-step="1" data-step-title="Basic Info">
         <div>
             <label for="csr_name">Name:</label>
             <input type="text" id="csr_name" name="csr_name" required aria-label="Name">
@@ -26,7 +29,90 @@
             <label for="csr_location">Location:</label>
             <input type="text" id="csr_location" name="csr_location" required aria-label="Location">
         </div>
-        <div>
+        </div>
+
+        <!-- Step 2 (Issue #6): Waste Categories. Card grid below (Issue #7) selects
+             which categories apply and shows/hides the matching detail block.
+             Subcategory picker UI is Issue #8, detail blocks still use the
+             original checkbox/fieldset layout for now. Card checkboxes are
+             UI-only, not submitted, so form-handler.php needs no changes. -->
+        <div class="csr-step" data-step="2" data-step-title="Waste Categories">
+        <p class="csr-category-cards-intro">What types of waste did you collect? Select as many as apply.</p>
+        <div class="csr-category-cards">
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="unsorted_litter">
+                <span class="csr-category-icon" aria-hidden="true">🗑️</span>
+                <span class="csr-category-label">Unsorted Litter</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="plastic">
+                <span class="csr-category-icon" aria-hidden="true">🧴</span>
+                <span class="csr-category-label">Plastic Waste</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="paper">
+                <span class="csr-category-icon" aria-hidden="true">📄</span>
+                <span class="csr-category-label">Paper Waste</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="food">
+                <span class="csr-category-icon" aria-hidden="true">🍎</span>
+                <span class="csr-category-label">Food Waste</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="metal">
+                <span class="csr-category-icon" aria-hidden="true">🥫</span>
+                <span class="csr-category-label">Metal Waste</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="glass">
+                <span class="csr-category-icon" aria-hidden="true">🍾</span>
+                <span class="csr-category-label">Glass Waste</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="cigarette">
+                <span class="csr-category-icon" aria-hidden="true">🚬</span>
+                <span class="csr-category-label">Cigarette Litter</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="textiles">
+                <span class="csr-category-icon" aria-hidden="true">👕</span>
+                <span class="csr-category-label">Textiles</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="medical">
+                <span class="csr-category-icon" aria-hidden="true">💊</span>
+                <span class="csr-category-label">Medical Waste</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="sanitary">
+                <span class="csr-category-icon" aria-hidden="true">🧻</span>
+                <span class="csr-category-label">Sanitary Products</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="fishing">
+                <span class="csr-category-icon" aria-hidden="true">🎣</span>
+                <span class="csr-category-label">Fishing Gear</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="styrofoam_hazardous">
+                <span class="csr-category-icon" aria-hidden="true">☣️</span>
+                <span class="csr-category-label">Styrofoam &amp; Hazardous</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="miscellaneous">
+                <span class="csr-category-icon" aria-hidden="true">📦</span>
+                <span class="csr-category-label">Miscellaneous</span>
+            </label>
+            <label class="csr-category-card">
+                <input type="checkbox" class="csr-category-toggle" data-category="derelict">
+                <span class="csr-category-icon" aria-hidden="true">🚗</span>
+                <span class="csr-category-label">Derelict Items</span>
+            </label>
+        </div>
+        <p class="csr-category-cards-note">Icons are placeholders, a proper icon set is tracked in Issue #18.</p>
+
+        <div data-category-detail="unsorted_litter">
             <label for="csr_unsorted_litter_weight">Unsorted Litter (lbs):</label>
             <input type="number" id="csr_unsorted_litter_weight" name="csr_unsorted_litter_weight" step="0.01" min="0" aria-label="Unsorted Litter">
             <fieldset class="collapsible">
@@ -43,7 +129,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="plastic">
             <label for="csr_plastic_waste_weight">Plastic Waste (lbs):</label>
             <input type="number" id="csr_plastic_waste_weight" name="csr_plastic_waste_weight" step="0.01">
             <fieldset class="collapsible">
@@ -108,7 +194,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="paper">
             <label for="csr_paper_waste_weight">Paper Waste (lbs):</label>
             <input type="number" id="csr_paper_waste_weight" name="csr_paper_waste_weight" step="0.01">
             <fieldset class="collapsible">
@@ -161,7 +247,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="food">
             <label for="csr_food_waste_weight">Food Waste (lbs):</label>
             <input type="number" id="csr_food_waste_weight" name="csr_food_waste_weight" step="0.01">
             <fieldset class="collapsible">
@@ -190,7 +276,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="metal">
             <label for="csr_metal_waste_weight">Metal Waste (lbs):</label>
             <input type="number" id="csr_metal_waste_weight" name="csr_metal_waste_weight" step="0.01">
             <fieldset class="collapsible">
@@ -243,7 +329,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="glass">
             <label for="csr_glass_waste_weight">Glass Waste (lbs):</label>
             <input type="number" id="csr_glass_waste_weight" name="csr_glass_waste_weight" step="0.01">
             <fieldset class="collapsible">
@@ -292,7 +378,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="cigarette">
             <label for="csr_cigarette_litter_weight">Cigarette Litter (lbs):</label>
             <input type="number" id="csr_cigarette_litter_weight" name="csr_cigarette_litter_weight" step="0.01">
             <fieldset class="collapsible">
@@ -321,7 +407,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="textiles">
             <label for="csr_textiles_weight">Textiles (lbs):</label>
             <input type="number" id="csr_textiles_weight" name="csr_textiles_weight" step="0.01">
             <fieldset class="collapsible">
@@ -374,7 +460,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="medical">
             <label for="csr_medical_waste_weight">Medical Waste (lbs):</label>
             <input type="number" id="csr_medical_waste_weight" name="csr_medical_waste_weight" step="0.01">
             <fieldset class="collapsible">
@@ -419,7 +505,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="sanitary">
             <label for="csr_sanitary_products_weight">Sanitary Products (lbs):</label>
             <input type="number" id="csr_sanitary_products_weight" name="csr_sanitary_products_weight" step="0.01">
             <fieldset class="collapsible">
@@ -456,7 +542,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="fishing">
             <label for="csr_fishing_gear_weight">Fishing Gear (lbs):</label>
             <input type="number" id="csr_fishing_gear_weight" name="csr_fishing_gear_weight" step="0.01">
             <fieldset class="collapsible">
@@ -501,7 +587,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="styrofoam_hazardous">
             <label for="csr_styrofoam_hazardous_waste_weight">Styrofoam & Hazardous Waste (lbs):</label>
             <input type="number" id="csr_styrofoam_hazardous_waste_weight" name="csr_styrofoam_hazardous_waste_weight" step="0.01">
             <fieldset class="collapsible">
@@ -567,7 +653,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="miscellaneous">
             <label for="csr_miscellaneous_weight">Miscellaneous (lbs):</label>
             <input type="number" id="csr_miscellaneous_weight" name="csr_miscellaneous_weight" step="0.01">
             <fieldset class="collapsible">
@@ -600,7 +686,7 @@
                 </div>
             </fieldset>
         </div>
-        <div>
+        <div data-category-detail="derelict">
             <label for="csr_derelict_items_weight">Derelict Items (lbs):</label>
             <input type="number" id="csr_derelict_items_weight" name="csr_derelict_items_weight" step="0.01">
             <fieldset class="collapsible">
@@ -641,6 +727,10 @@
                 </div>
             </fieldset>
         </div>
+        </div>
+
+        <!-- Step 3 (Issue #6): Habitat Restoration -->
+        <div class="csr-step" data-step="3" data-step-title="Habitat Restoration">
         <div>
             <h3>Habitat Restoration</h3>
             <div>
@@ -691,16 +781,32 @@
                 <input type="number" id="csr_volunteers_involved" name="csr_volunteers_involved" step="1" min="0">
             </div>
         </div>
+        </div>
+
+        <!-- Step 4 (Issue #6): Photos. csr_notes textarea intentionally not added
+             here, tracked as a separate small follow-up referenced in the
+             Issue #4 audit doc, out of scope for this PR. -->
+        <div class="csr-step" data-step="4" data-step-title="Photos">
         <div>
             <label for="csr_photos">Upload Photos:</label>
             <input type="file" id="csr_photos" name="csr_photos[]" multiple accept="image/*">
             <small>You can upload multiple photos (JPEG, PNG, GIF).</small>
         </div>
+        </div>
+
+        <!-- Step 5 (Issue #6): Review and Submit. A full editable review
+             summary is Issue #9's scope, this is just the final step
+             containing the existing submit control. -->
+        <div class="csr-step" data-step="5" data-step-title="Review and Submit">
         <div>
+            <p>Please use the Back button to review any earlier steps before submitting.</p>
             <input type="hidden" name="csr_honeypot" value="">
             <button type="submit" name="csr_submit">Submit Report</button>
+        </div>
         </div>
     </form>
 </div>
 <!-- Voice Assistant JS -->
 <script src="<?php echo plugin_dir_url(__FILE__); ?>assets/js/ecoservants-csr.js"></script>
+<!-- csr-guided-wrapper.js is enqueued in ecoservants-csr.php via ecoservants_enqueue_scripts(),
+     not included directly here, so it loads once and only on pages where the form actually renders. -->
