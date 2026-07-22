@@ -38,18 +38,30 @@ form textarea {
     resize: vertical;
 }
 
+/* Fieldset styling, rebuilt as a clean header bar sitting above its box
+   instead of the browser default where the legend straddles the top
+   border. That default straddle look was what made section titles
+   appear to overlap the box beneath them once the guided wrapper (#6)
+   started showing one step at a time. */
 form fieldset {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
+    border: none;
+    border-radius: 0;
+    padding: 0;
     margin-top: 10px;
-    background: #fff;
+    background: transparent;
 }
 
-form fieldset legend {
+form fieldset > legend {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
     font-weight: bold;
     color: #000;
-    padding: 0 10px;
+    padding: 10px;
+    margin: 0 0 8px 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
 form button {
@@ -512,20 +524,30 @@ form fieldset label input[type="number"] {
     }
 }
 
-/* Collapsible Fieldset */
-.collapsible {
-    border: 1px solid #ddd;
-    border-radius: 10px;
+/* Collapsible Fieldset. Rebuilt to render the legend as a clean header bar
+   sitting directly above the content box, instead of the browser default
+   where the legend straddles the fieldset's top border. This matches the
+   same fix applied to plain fieldsets above (form fieldset > legend), so
+   the whole form looks consistent whether a section is collapsible or not. */
+fieldset.collapsible {
+    border: none;
+    border-radius: 0;
     margin-top: 10px;
-    background: #fff;
+    background: transparent;
 }
 
-.collapsible-header {
+fieldset.collapsible > legend.collapsible-header {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
     cursor: pointer;
     font-weight: bold;
     color: #000;
     padding: 10px;
-    display: flex;
+    margin: 0 0 8px 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     justify-content: space-between;
     align-items: center;
 }
@@ -537,6 +559,9 @@ form fieldset label input[type="number"] {
 .collapsible-content {
     display: none;
     padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
 }
 
 .collapsible.open .collapsible-content {
@@ -829,4 +854,115 @@ form fieldset label input[type="number"] {
     display: block;
     font-size: 0.6em;
     margin: 2px 0 0 0; /* remove left margin from old rule */
+}
+
+/* Guided step navigation controls (Issue #6) */
+.csr-step-progress {
+    font-weight: bold;
+    color: #243b7e;
+    margin-bottom: 16px;
+}
+
+.csr-step-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.csr-step-nav .csr-step-back {
+    background: #ccc;
+    color: #333;
+}
+
+.csr-step-nav .csr-step-back:hover {
+    background: #bbb;
+}
+
+/* Category card selection (Issue #7) */
+.csr-category-cards-intro {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.csr-category-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.csr-category-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px 10px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    margin-bottom: 0;
+}
+
+.csr-category-card:hover {
+    border-color: #243b7e;
+    transform: translateY(-2px);
+}
+
+.csr-category-card .csr-category-toggle {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+}
+
+.csr-category-card-selected {
+    border-color: #243b7e;
+    background: #eef1fa;
+    box-shadow: 0 4px 12px rgba(36, 59, 126, 0.15);
+}
+
+.csr-category-icon {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.csr-category-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #243b7e;
+}
+
+.csr-category-cards-note {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+/* Mobile responsiveness for category cards */
+@media (max-width: 768px) {
+    .csr-category-cards {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 10px;
+    }
+
+    .csr-category-card {
+        padding: 12px 8px;
+    }
+
+    .csr-category-icon {
+        font-size: 24px;
+    }
+
+    .csr-category-label {
+        font-size: 12px;
+    }
 }
