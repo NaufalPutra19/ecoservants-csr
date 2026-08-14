@@ -2,7 +2,7 @@
 /*
 Plugin Name: EcoServants CSR
 Description: A plugin for environmental volunteers to submit Community Site Reports (CSR) after cleanup events.
-Version: 1.0
+Version: 1.1.7-guided-interim
 By: EcoServants - Thanks to our developers
 Author URI: https://ecoservantsproject.org
 */
@@ -328,9 +328,11 @@ add_action('init', function () {
 
 // Enqueue scripts and styles
 function ecoservants_enqueue_scripts() {
-    wp_enqueue_style('ecoservants-style', plugin_dir_url(__FILE__) . 'assets/css/style.css');
-    wp_enqueue_script('ecoservants-carousel', plugin_dir_url(__FILE__) . 'assets/js/carousel.js', array(), null, true); // Enqueue carousel script
-    wp_enqueue_script('csr-guided-wrapper', plugin_dir_url(__FILE__) . 'assets/js/csr-guided-wrapper.js', array(), null, true); // Enqueue guided wrapper script (Issue #6)
+    $version = '1.1.4-new-report-reset';
+    wp_enqueue_style('ecoservants-style', plugin_dir_url(__FILE__) . 'assets/css/style.css', array(), $version);
+    wp_enqueue_script('ecoservants-carousel', plugin_dir_url(__FILE__) . 'assets/js/carousel.js', array(), $version, true);
+    wp_enqueue_script('csr-guided-wrapper', plugin_dir_url(__FILE__) . 'assets/js/csr-guided-wrapper.js', array(), $version, true);
+    wp_enqueue_script('csr-wall-modal', plugin_dir_url(__FILE__) . 'assets/js/csr-wall-modal.js', array(), $version, true);
 }
 add_action('wp_enqueue_scripts', 'ecoservants_enqueue_scripts');
 
@@ -339,8 +341,60 @@ include plugin_dir_path(__FILE__) . 'form-handler.php';
 
 // Register shortcode for the form
 function ecoservants_csr_form_shortcode() {
+    $submitted = isset($_GET['submitted']) && sanitize_text_field(wp_unslash($_GET['submitted'])) === 'true';
+    $report_id = isset($_GET['csr_report_id']) ? absint($_GET['csr_report_id']) : 0;
+
     ob_start();
+
+    if ($submitted) {
+        ?>
+        <section class="csr-submission-complete" aria-labelledby="csr-submission-complete-title">
+            <div class="csr-submission-complete__icon" aria-hidden="true">✓</div>
+            <p class="csr-submission-complete__kicker">Community Site Report Recorded</p>
+            <h2 id="csr-submission-complete-title">Thank you for making an environmental impact.</h2>
+            <p>Your report has been submitted successfully and added to the EcoServants® Community Site Report record<?php echo $report_id ? ' as report #' . esc_html($report_id) : ''; ?>.</p>
+            <p class="csr-submission-complete__note">Your contribution may now appear below as part of the EcoServants® Wall of Fame.</p>
+            <div class="csr-submission-complete__actions">
+                <a class="csr-wall-action csr-wall-action--primary" href="#csr-completion-wall">View the Wall of Fame</a>
+                <a class="csr-wall-action csr-wall-action--secondary" href="<?php echo esc_url(add_query_arg('csr_new', '1', remove_query_arg(['submitted', 'csr_report_id', 'csr_error']))); ?>">Submit Another Report</a>
+            </div>
+        </section>
+
+        <section id="csr-completion-wall" class="csr-completion-wall" aria-labelledby="csr-completion-wall-title">
+            <div class="csr-completion-wall__heading">
+                <p>Community Recognition</p>
+                <h2 id="csr-completion-wall-title">EcoServants® Wall of Fame</h2>
+                <span>Celebrating volunteers, teams, and organizations turning environmental responsibility into action.</span>
+            </div>
+            <?php echo ecoservants_wall_of_fame_shortcode(['limit' => 50]); ?>
+        </section>
+        <?php
+        return ob_get_clean();
+    }
+
     include plugin_dir_path(__FILE__) . 'form-template.php';
+    ?>
+    <div class="csr-wall-link-row">
+        <button type="button" class="csr-wall-link" data-csr-wall-open aria-haspopup="dialog" aria-controls="csr-wall-modal">
+            View the EcoServants® Wall of Fame
+        </button>
+    </div>
+
+    <div id="csr-wall-modal" class="csr-wall-modal" aria-hidden="true">
+        <div class="csr-wall-modal__backdrop" data-csr-wall-close></div>
+        <div class="csr-wall-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="csr-wall-modal-title">
+            <button type="button" class="csr-wall-modal__close" data-csr-wall-close aria-label="Close Wall of Fame">×</button>
+            <div class="csr-wall-modal__heading">
+                <p>Community Recognition</p>
+                <h2 id="csr-wall-modal-title">EcoServants® Wall of Fame</h2>
+                <span>See how volunteers and partners are creating measurable environmental impact.</span>
+            </div>
+            <div class="csr-wall-modal__content">
+                <?php echo ecoservants_wall_of_fame_shortcode(['limit' => 50]); ?>
+            </div>
+        </div>
+    </div>
+    <?php
     return ob_get_clean();
 }
 add_shortcode('csr_form', 'ecoservants_csr_form_shortcode');

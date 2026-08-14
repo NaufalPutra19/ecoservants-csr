@@ -1,6 +1,28 @@
 <?php
+/**
+ * Resolve a reliable front-end return URL for admin-post submissions.
+ * wp_get_referer() can be empty on cached pages, privacy-focused browsers,
+ * some staging setups, or when security plugins strip the Referer header.
+ */
+function ecoservants_csr_return_url() {
+    $posted_url = isset($_POST['csr_return_url']) ? esc_url_raw(wp_unslash($_POST['csr_return_url'])) : '';
+
+    if ($posted_url && wp_http_validate_url($posted_url)) {
+        return $posted_url;
+    }
+
+    $referer = wp_get_referer();
+    if ($referer && wp_http_validate_url($referer)) {
+        return $referer;
+    }
+
+    return home_url('/');
+}
+
 function ecoservants_handle_csr_form() {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['csr_submit'])) {
+    // This callback only runs for action=csr_form. Do not depend on the submit
+    // button name because browsers omit disabled submit buttons from POST data.
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($_POST['csr_form_nonce_field']) || !wp_verify_nonce($_POST['csr_form_nonce_field'], 'csr_form_nonce')) {
             die('Security check failed');
         }
@@ -14,6 +36,17 @@ function ecoservants_handle_csr_form() {
         $date = sanitize_text_field($_POST['csr_date']);
         $location = sanitize_text_field($_POST['csr_location']);
         $location = str_replace(',', ' -', $location); // Replace commas with a dash for consistency
+
+        // Interim guided workflow metadata. These fields are optional and do not
+        // alter any existing report totals or legacy CSR integrations.
+        $reporter_type = isset($_POST['csr_reporter_type']) ? sanitize_key($_POST['csr_reporter_type']) : 'individual';
+        if (!in_array($reporter_type, ['individual', 'team', 'organization'], true)) {
+            $reporter_type = 'individual';
+        }
+        $organization_name = isset($_POST['csr_organization_name']) ? sanitize_text_field($_POST['csr_organization_name']) : '';
+        $team_name = isset($_POST['csr_team_name']) ? sanitize_text_field($_POST['csr_team_name']) : '';
+        $event_name = isset($_POST['csr_event_name']) ? sanitize_text_field($_POST['csr_event_name']) : '';
+        $internal_reference = isset($_POST['csr_internal_reference']) ? sanitize_text_field($_POST['csr_internal_reference']) : '';
         $unsorted_litter_weight = floatval($_POST['csr_unsorted_litter_weight']);
         $unsorted_litter_subcategories = isset($_POST['csr_unsorted_litter_subcategories']) ? implode(',', array_map('sanitize_text_field', $_POST['csr_unsorted_litter_subcategories'])) : '';
         $unsorted_litter_subcategories_count = isset($_POST['csr_unsorted_litter_subcategories_count']) ? array_map('intval', $_POST['csr_unsorted_litter_subcategories_count']) : [];
@@ -126,6 +159,11 @@ function ecoservants_handle_csr_form() {
             'csr_email' => $email,
             'csr_date' => $date,
             'csr_location' => $location,
+            'csr_reporter_type' => $reporter_type,
+            'csr_organization_name' => $organization_name,
+            'csr_team_name' => $team_name,
+            'csr_event_name' => $event_name,
+            'csr_internal_reference' => $internal_reference,
             'csr_unsorted_litter_weight' => $unsorted_litter_weight,
             'csr_unsorted_litter_subcategories' => $unsorted_litter_subcategories,
             'csr_unsorted_litter_subcategories_count' => json_encode($unsorted_litter_subcategories_count),
@@ -193,15 +231,27 @@ function ecoservants_handle_csr_form() {
             'post_type' => 'csr_report',
             'post_status' => 'publish',
             'meta_input' => $meta_input,
-        ]);
+        ], true);
 
-        if ($post_id) {
-            wp_redirect(add_query_arg('submitted', 'true', wp_get_referer()));
-            exit;
+        $return_url = ecoservants_csr_return_url();
+
+        if (!is_wp_error($post_id) && $post_id > 0) {
+            $redirect_url = add_query_arg([
+                'submitted' => 'true',
+                'csr_report_id' => (int) $post_id,
+            ], $return_url);
         } else {
-            wp_redirect(add_query_arg('submitted', 'false', wp_get_referer()));
-            exit;
+            $error_code = is_wp_error($post_id) ? $post_id->get_error_code() : 'insert_failed';
+            $redirect_url = add_query_arg([
+                'submitted' => 'false',
+                'csr_error' => sanitize_key($error_code),
+            ], $return_url);
         }
+
+        // Prevent admin-post.php from becoming the visible landing page when
+        // the browser omits the Referer header or output buffering is active.
+        wp_safe_redirect($redirect_url, 303, 'EcoServants CSR');
+        exit;
     }
 }
 

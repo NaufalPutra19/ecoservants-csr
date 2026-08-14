@@ -10,9 +10,67 @@
     <form class="csr-form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>" enctype="multipart/form-data">
         <?php wp_nonce_field('csr_form_nonce', 'csr_form_nonce_field'); ?>
         <input type="hidden" name="action" value="csr_form">
+        <input type="hidden" name="csr_submit" value="1">
+        <input type="hidden" name="csr_return_url" value="<?php echo esc_url(get_permalink()); ?>">
 
-        <!-- Step 1 (Issue #6): Basic Info -->
-        <div class="csr-step" data-step="1" data-step-title="Basic Info">
+        <!-- Step 1: Reporter and event details -->
+        <div class="csr-step" data-step="1" data-step-title="About You and Your Event">
+        <div class="csr-guided-intro">
+            <span class="csr-guided-kicker">Community Site Report</span>
+            <h3>Tell us who is making an impact</h3>
+            <p>Choose the reporting path that best fits your cleanup or restoration activity. Individual reporting is fully available today; team and organization information is collected now while expanded dashboards are being developed.</p>
+        </div>
+
+        <fieldset class="csr-reporter-path" aria-labelledby="csr-reporter-path-title">
+            <legend id="csr-reporter-path-title">Who is submitting this report?</legend>
+            <div class="csr-path-grid">
+                <label class="csr-path-card">
+                    <input type="radio" name="csr_reporter_type" value="individual" checked>
+                    <span class="csr-path-icon" aria-hidden="true">👤</span>
+                    <strong>Individual Volunteer</strong>
+                    <small>Report your own cleanup or restoration activity.</small>
+                </label>
+                <label class="csr-path-card">
+                    <input type="radio" name="csr_reporter_type" value="team">
+                    <span class="csr-path-icon" aria-hidden="true">👥</span>
+                    <strong>Volunteer Team</strong>
+                    <small>Record a group, class, club, or community event.</small>
+                </label>
+                <label class="csr-path-card">
+                    <input type="radio" name="csr_reporter_type" value="organization">
+                    <span class="csr-path-icon" aria-hidden="true">🏢</span>
+                    <strong>Company or Organization</strong>
+                    <small>Capture participation for a partner or workplace event.</small>
+                </label>
+            </div>
+        </fieldset>
+
+        <div class="csr-organization-fields" hidden>
+            <div class="csr-coming-soon">
+                <strong>Organizational reporting preview</strong>
+                <span>Team dashboards, branded summaries, goals, badges, and downloadable impact reports are planned for the full CSR experience.</span>
+            </div>
+            <div class="csr-two-col">
+                <div>
+                    <label for="csr_organization_name">Organization or Team Name:</label>
+                    <input type="text" id="csr_organization_name" name="csr_organization_name" placeholder="Example: GreenWorks Volunteer Team">
+                </div>
+                <div>
+                    <label for="csr_team_name">Department, Class, or Group:</label>
+                    <input type="text" id="csr_team_name" name="csr_team_name" placeholder="Optional">
+                </div>
+                <div>
+                    <label for="csr_event_name">Event or Campaign Name:</label>
+                    <input type="text" id="csr_event_name" name="csr_event_name" placeholder="Optional">
+                </div>
+                <div>
+                    <label for="csr_internal_reference">Internal Reference:</label>
+                    <input type="text" id="csr_internal_reference" name="csr_internal_reference" placeholder="Optional event or campaign ID">
+                </div>
+            </div>
+        </div>
+
+        <div class="csr-two-col csr-basic-fields">
         <div>
             <label for="csr_name">Name:</label>
             <input type="text" id="csr_name" name="csr_name" required aria-label="Name">
@@ -25,16 +83,32 @@
             <label for="csr_date">Date:</label>
             <input type="date" id="csr_date" name="csr_date" required aria-label="Date">
         </div>
-        <div>
+        <div class="csr-location-field">
             <label for="csr_location">Location:</label>
-            <input type="text" id="csr_location" name="csr_location" required aria-label="Location">
+            <input type="text" id="csr_location" name="csr_location" required aria-label="Location" placeholder="City, state, park, shoreline, or site">
+            <div class="csr-location-actions">
+                <button type="button" id="csr-use-location" class="csr-use-location">
+                    <span aria-hidden="true">📍</span> Use My Current Location
+                </button>
+                <span id="csr-location-status" class="csr-location-status" role="status" aria-live="polite"></span>
+            </div>
+            <small class="csr-location-help">You may use your device location or enter the location manually.</small>
         </div>
+        </div>
+        <p class="csr-save-note" role="status">Your progress is automatically saved on this device until the report is submitted.</p>
         </div>
 
         <!-- Step 2 (Issue #6): Waste Categories. Card-based selection UI is Issue #7,
              subcategory picker UI is Issue #8, this step still uses the original
              checkbox/fieldset layout, only wrapped for step navigation. -->
-        <div class="csr-step" data-step="2" data-step-title="Waste Categories">
+        <div class="csr-step" data-step="2" data-step-title="Select What You Collected">
+        <div class="csr-step-heading">
+            <span class="csr-guided-kicker">Collection details</span>
+            <h3>What did you collect?</h3>
+            <p>Select every category that applies. Only the categories you choose will expand for weights and item counts.</p>
+        </div>
+        <div id="csr-category-card-grid" class="csr-category-grid" aria-label="Waste and material categories"></div>
+        <div class="csr-category-details">
         <div>
             <label for="csr_unsorted_litter_weight">Unsorted Litter (lbs):</label>
             <input type="number" id="csr_unsorted_litter_weight" name="csr_unsorted_litter_weight" step="0.01" min="0" aria-label="Unsorted Litter">
@@ -651,11 +725,16 @@
             </fieldset>
         </div>
         </div>
+        </div>
 
-        <!-- Step 3 (Issue #6): Habitat Restoration -->
-        <div class="csr-step" data-step="3" data-step-title="Habitat Restoration">
+        <!-- Step 3: Habitat Restoration -->
+        <div class="csr-step" data-step="3" data-step-title="Restoration and Participation">
         <div>
-            <h3>Habitat Restoration</h3>
+            <div class="csr-step-heading">
+                <span class="csr-guided-kicker">Beyond litter removal</span>
+                <h3>Habitat restoration and participation</h3>
+                <p>Complete only the activities that apply. It is fine to leave unrelated fields blank.</p>
+            </div>
             <div>
                 <label for="csr_trees_planted">Number of Trees Planted:</label>
                 <input type="number" id="csr_trees_planted" name="csr_trees_planted" step="1" min="0">
@@ -709,7 +788,12 @@
         <!-- Step 4 (Issue #6): Photos. csr_notes textarea intentionally not added
              here, tracked as a separate small follow-up referenced in the
              Issue #4 audit doc, out of scope for this PR. -->
-        <div class="csr-step" data-step="4" data-step-title="Photos">
+        <div class="csr-step" data-step="4" data-step-title="Photos and Evidence">
+        <div class="csr-step-heading">
+            <span class="csr-guided-kicker">Show the impact</span>
+            <h3>Add photos from the site</h3>
+            <p>Photos help document the activity and may be featured in the EcoServants® Wall of Fame.</p>
+        </div>
         <div>
             <label for="csr_photos">Upload Photos:</label>
             <input type="file" id="csr_photos" name="csr_photos[]" multiple accept="image/*">
@@ -721,10 +805,15 @@
              summary is Issue #9's scope, this is just the final step
              containing the existing submit control. -->
         <div class="csr-step" data-step="5" data-step-title="Review and Submit">
+        <div class="csr-step-heading">
+            <span class="csr-guided-kicker">Final check</span>
+            <h3>Review your environmental impact</h3>
+            <p>Confirm the information below before submitting. Use the edit buttons to return to a section.</p>
+        </div>
+        <div id="csr-review-summary" class="csr-review-summary" aria-live="polite"></div>
         <div>
-            <p>Please use the Back button to review any earlier steps before submitting.</p>
             <input type="hidden" name="csr_honeypot" value="">
-            <button type="submit" name="csr_submit">Submit Report</button>
+            <button type="submit">Submit Report</button>
         </div>
         </div>
     </form>
