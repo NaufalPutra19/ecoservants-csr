@@ -1,249 +1,572 @@
-# EcoServants CSR Plugin
+# EcoServants® CSR Plugin
 
-Welcome to the official repository for the **EcoServants CSR Plugin** — a digital tool created to modernize and empower global environmental action.
+The **EcoServants® Community Site Report (CSR) Plugin** is a custom WordPress environmental reporting system developed by the Ecological Servants Project.
 
----
+CSR allows volunteers, community groups, organizations, cleanup teams, interns, and other participants to document environmental stewardship activity through a guided digital reporting workflow.
 
-# What Is the EcoServants CSR Plugin?
-
-The EcoServants CSR Plugin is a custom WordPress plugin designed to replace paper-based Community Site Reports (CSRs) with a streamlined, mobile-friendly digital form. This form helps volunteers easily log the results of their cleanups — including detailed data on the types and quantities of litter collected — in a smarter, more sustainable way.
-
-Built by a team of dedicated interns and environmental technologists, this plugin is crafted to support **global community cleanup efforts** hosted by the **EcoServants Project**.
-
-**Please note:** This plugin is **not open-source**. It is proprietary software licensed under the *EcoServants® Project Cleanup Software Redistribution License, Version 1.0 – March 2025*. Redistribution or use is restricted as outlined in the license below.
+The system converts field activity into structured environmental impact data that EcoServants® can use for community reporting, program evaluation, grant reporting, partner engagement, and long-term environmental analysis.
 
 ---
 
-## Why It Matters
+## Current Production Release
 
-Every year, millions of pounds of plastic, cigarette waste, metal, glass, and hazardous materials pollute our parks, coastlines, streets, and forests. Communities around the world step up to clean these places, but the impact of their work often goes undocumented or underutilized.
+**Version:** `1.1.7-guided-interim`
 
-The EcoServants CSR Plugin solves this by:
+The GitHub repository was synchronized with the current production CSR plugin on **August 14, 2026**.
 
-- Making it easy for volunteers to **submit digital cleanup reports**
-- Structuring the data in a way that helps us **track patterns** and **measure impact**
-- Empowering communities to **organize smarter cleanups**
-- Giving EcoServants the ability to use collected data for **education, awareness, funding, and advocacy**
+The corresponding production baseline is available through the GitHub release:
 
-By improving how we gather and organize this data, we’re building a cleaner, more resilient Earth together.
+`v1.1.7-guided-interim`
 
----
-
-## Features
-
-- **Smart Categorization** – Plastic, metal, food waste, textiles and more
-- **Mobile-Responsive** – Works across devices in the field
-- **Data-Ready** – Submissions are stored for analysis and impact reports
-- **Safe Waste Handling Notes** – Clear flags for hazardous/medical waste
-- **Modular Design** – Easy to improve, expand or adapt
+This release establishes the baseline for continued CSR v1.2 and v2.0 development.
 
 ---
 
-## Intern Contributions Add As We Go
+# What Is the EcoServants® CSR Plugin?
 
-A special thanks to **Joudy Alkheder** for her help on stylesheets and datasets.\
-Thank you **Lilianna Cordero**, **Dalcy Fouty**, **Oyku Akdeniz**, **Srivatsa Yanamandra**, **Dominique Maboulou**, and **Jordan Hill** for your contributions in data analysis and subcategorizing litter types.
+The EcoServants® CSR Plugin is a custom WordPress plugin designed to make environmental field reporting simple, structured, and useful.
 
----
+Instead of relying on paper forms, disconnected spreadsheets, or informal cleanup reports, CSR provides a guided reporting process that captures information such as:
 
-## File Structure
+* Reporter type
+* Individual, team, or organization participation
+* Cleanup or restoration activity
+* Reporting date
+* Location
+* Waste categories
+* Waste subcategories
+* Item counts
+* Estimated or recorded weights
+* Volunteer participation
+* Organization/team information
+* Photos
+* Notes
+* Environmental impact data
 
-This repository includes:
-
-| Level | Folder/File | Purpose |
-| --- | --- | --- |
-| 1 | `EcoServants-CSR/` | Main plugin directory containing all core files |
-| 2 | `ecoservants-csr.php` | Main plugin logic, registration, hooks and includes |
-| 2 | `form-handler.php` | Backend logic for handling form submissions |
-| 2 | `form-template.php` | HTML/PHP structure of the frontend form |
-| 2 | `license.txt` | Software license file for redistribution and use |
-| 2 | `README.md` | Documentation and installation guide |
-| 2 | `assets/` | Folder for styling and design resources |
-| 3 | `assets/css/` | Subfolder for stylesheets |
-| 3 | `style.css` | Custom plugin stylesheet for UI/layout |
-| 3 | `assets/js/` | Subfolder for JavaScript |
-| 3 | `carousel.js` | Displays Wall of Fame carousel on the frontend |
+Each submitted report is stored as a structured CSR record inside WordPress.
 
 ---
 
-## Embedding the Wall of Fame
+# Why It Matters
 
-To embed the Wall of Fame on another website, use the following iframe code:
+Environmental stewardship work often happens without consistent documentation.
 
-```html
-<iframe 
-    src="https://esp-university.earth/?wall_of_fame_iframe=true" 
-    width="100%" 
-    height="600" 
-    style="border: none;">
-</iframe>
-```
+Volunteers may remove hundreds of pounds of litter, restore habitat, remove invasive species, or organize community cleanup events without that work becoming part of a usable environmental dataset.
 
-Replace `https://esp-university.earth/` with the URL of your WordPress site.
+CSR helps EcoServants®:
 
----
+* Document environmental service activity
+* Measure pounds of material removed
+* Track cleanup and restoration activity
+* Record volunteer and organizational participation
+* Identify waste patterns
+* Build long-term environmental datasets
+* Support grant and funder reporting
+* Demonstrate community impact
+* Provide organizations with measurable environmental outcomes
+* Support future dashboards and partner reporting tools
 
-## Embedding the CSR Form and Total Impact Metrics
+The goal is not simply to collect reports.
 
-To embed the CSR form or Total Impact Metrics on another website, use the following iframe codes:
-
-### CSR Form
-```html
-<iframe 
-    src="https://esp-university.earth/?csr_form_iframe=true" 
-    width="100%" 
-    height="800" 
-    style="border: none;">
-</iframe>
-```
-
-### Total Impact Metrics
-```html
-<iframe 
-    src="https://esp-university.earth/?total_impact_iframe=true" 
-    width="100%" 
-    height="600" 
-    style="border: none;">
-</iframe>
-```
-
-Replace `https://esp-university.earth/` with the URL of your WordPress site.
+The goal is to transform environmental service into **structured, measurable, reusable impact data**.
 
 ---
 
-## Thank You
+# Current Production Features
 
-Whether you’re writing a line of code, creating a wireframe, or organizing item categories — **your contribution matters**. This plugin isn’t just a tool. It’s a statement: that we can build technology that heals, helps, and supports the Earth and the people who protect it.
+## Guided Reporting Workflow
 
-With gratitude,\
-**The EcoServants Team**\
-[https://ecoservantsproject.org](https://ecoservantsproject.org)
+The current CSR system uses a guided, multi-step reporting experience rather than requiring users to complete one large form.
+
+The guided workflow includes:
+
+* Step-by-step navigation
+* Back and Next controls
+* Progress indicators
+* Conditional sections
+* Review-before-submit
+* Mobile-responsive layouts
+* Preservation of entered information while navigating
 
 ---
 
-## License
+## Reporter Paths
 
-**EcoServants® Project Cleanup Software Redistribution License**\
-**Version 1.0 – March 2025**
+CSR currently supports reporting paths for:
 
-Copyright (c) 2025 Ecological Servants Project (EcoServants®)\
-All rights reserved.
+* Individuals
+* Teams
+* Organizations / companies
 
-This software, known as EcoServants CSR, was developed exclusively by the Ecological Servants Project in collaboration with its interns under a binding Non-Disclosure Agreement (NDA). All source code, assets, and documentation are the intellectual property of the Ecological Servants Project and are protected by applicable copyright and trademark laws.
+Organization and team metadata can be collected with CSR submissions.
 
-## Description
+The organizational data architecture will be expanded further under the CSR v2.0 roadmap.
 
-EcoServants CSR is a WordPress plugin designed for environmental volunteers to submit Community Site Reports (CSR) after cleanup events. The goal is to replace paper forms with a mobile-friendly digital form that categorizes and stores the results of cleanup efforts.
+---
 
-## Features
+## Waste Category Selection
 
-- Creates a custom post type called `csr_report`
-- Adds a frontend form (via shortcode) where users can submit cleanup data
-- Includes smart litter categorization
-- Stores form data in custom fields for each category
-- Includes basic input validation, anti-spam (honeypot or nonce), and success message on submission
-- Adds an admin panel for staff to view and manage submissions
-- Uses enqueue scripts/styles for clean UI
-- Fully responsive/mobile-friendly
+CSR uses visual category cards to help reporters identify the type of material collected.
 
-## Installation
+Major categories include areas such as:
 
-1. Upload the `ecoservants-csr` folder to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Use the `[csr_form]` shortcode to embed the form on any page.
+* Plastic Waste
+* Paper Waste
+* Metal Waste
+* Glass Waste
+* Cigarette Litter
+* Medical Waste
+* Food Waste
+* Textile Waste
+* Invasive Species
+* Other Waste
 
-## Usage
+Existing CSR subcategory data structures are also preserved.
 
-Use the following shortcodes to display various parts of the EcoServants CSR Plugin on your WordPress site:
+Additional subcategory-selection UX improvements are planned for CSR v1.2.
 
-- `[csr_form]` – Embeds the Community Site Report (CSR) submission form on a page.
-- `[total_impact]` – Displays total impact metrics from all submitted cleanups (e.g., total trash removed, items recycled).
-- `[wall_of_fame]` – Shows the latest cleanup results and publicly recognizes the volunteers involved.
+---
 
-Admins can view and manage submissions from the WordPress admin panel under the "CSR Reports" menu.
+## Draft Saving
 
-## Intended UI and System Enhancements
+The guided reporting interface includes local-device draft persistence.
 
-The next major phase of the EcoServants CSR Plugin is a user experience upgrade that keeps the same core reporting mechanics while making the submission process more guided, visual and useful for long-term environmental reporting.
+Reporters can leave or refresh the reporting workflow and recover entered information using the same browser/device.
 
-### Screen-by-Screen Question Flow
+Future server-side or account-based cross-device draft saving may be developed separately.
 
-The CSR form is intended to move from a long-form layout into a guided Q&A experience. Instead of requiring users to scroll through many fields at once, the system should ask one clear question per screen. This approach will make the CSR easier for first-time volunteers, cleanup leaders, interns and corporate users to complete accurately.
+---
 
-Planned improvements include:
+## Review Before Submission
 
-- One focused question or decision per screen
-- A clear progress indicator across the report process
-- Save and exit functionality for longer submissions
-- Simple help prompts or “how it’s done” guidance
-- A cleaner mobile-friendly experience for field reporting
-- Separate paths based on whether the report is submitted by an individual or an organization/company
+Before final submission, reporters can review information collected throughout the guided CSR workflow.
 
-### Category Cards
+The review process allows users to:
 
-Waste and restoration categories should be presented as large, clear selection cards rather than long form fields. These cards should help users quickly identify what type of material they collected or documented.
+* Review submitted information
+* Verify environmental activity details
+* Review organization/team information where applicable
+* Review selected categories and quantities
+* Return to earlier steps
+* Correct information
+* Return to the review screen
+* Submit the finalized CSR
 
-Planned category card examples include:
+Photo-specific review enhancements are being tracked separately.
 
-- Plastic Waste
-- Paper Waste
-- Metal Waste
-- Glass Waste
-- Cigarette Litter
-- Medical Waste
-- Invasive Species
-- Food Waste
-- Textile Waste
-- Other Waste
+---
 
-Each card should include a simple label, icon, brief description and examples so users can choose the correct category more confidently.
+## Photo Reporting
 
-### Pinwheel Subcategory Selection
+CSR supports:
 
-After a user selects a category, the next screen is intended to show a visual subcategory selector. For example, if a user chooses Plastic Waste, the system could display a circular pinwheel with Plastic in the center and subcategories around it.
+* Multiple photo uploads
+* Photo previews
+* Mobile photo selection
+* Mobile camera capture where supported
+* Attachment of photos to CSR records
 
-Potential plastic subcategories include:
+Additional validation, error handling, and review-screen improvements are planned under CSR v1.2.
 
-- Plastic bottles
-- Bottle caps
-- Straws and stirrers
-- Plastic bags
-- Food wrappers
-- Plastic utensils
-- Cups and lids
-- Six-pack rings
-- Microplastics
-- Toys
-- Hard plastics
-- Packaging materials
-- Fishing nets or plastic-based fishing gear
+---
 
-The goal is to make subcategory selection easier to teach, easier to use during cleanups and more consistent across reports submitted by different volunteers or teams.
+## Location Support
 
-### Weight and Item Count Inputs
+CSR includes location-related reporting fields and browser-assisted geolocation functionality where available.
 
-The redesigned CSR should allow users to record both weight and item count when appropriate. The interface should keep these inputs simple and close to the selected category or subcategory, helping users enter useful data without feeling overwhelmed.
+Location information may be used to help EcoServants® understand where environmental stewardship work is occurring and support future geographic analysis.
 
-### Corporate CSR Path
+---
 
-A dedicated corporate path is intended for companies, sponsors, employee volunteer teams, schools, organizations and community groups. This experience should do more than ask what was collected. It should help the organization understand and communicate why the data matters.
+## Environmental Impact Calculations
 
-The corporate path may support:
+The plugin includes existing impact calculation and aggregation functionality.
 
-- Company or organization name
-- Team size and participant tracking
-- Activity type
-- Cleanup, restoration or offset goals
-- Waste categories and total impact
-- Supporting documentation and photos
-- Branded impact summaries
-- Exportable reports
-- Recognition tools for sponsors and partners
-- Leaderboards or impact comparisons
-- Integrations for future reporting, dashboards or partner systems
+Current and future calculations may support metrics such as:
 
-The corporate CSR experience should help EcoServants provide clean data, branded summaries, measurable impact and public recognition. Over time, this can turn the CSR from a reporting form into a stronger corporate engagement tool that supports environmental action, sponsorships, grant reporting and community partnerships.
+* Total CSR reports
+* Pounds of material removed
+* Category-level impact
+* Participation totals
+* Calendar-year impact
+* Restoration activity
+* Organization/team impact
 
-### Long-Term Vision
+This calculation layer will be standardized and expanded through the CSR v2.0 analytics architecture.
 
-The redesigned CSR should feel less like a static form and more like a guided environmental reporting assistant. Better user experience should lead to better data. Better data should lead to stronger reports, stronger public impact metrics and stronger evidence for grants, sponsors and community partnerships.
+---
+
+## CSR Exports
+
+CSR already contains CSV/export functionality.
+
+Existing exports are being expanded so the data can be used more effectively for:
+
+* Internal analysis
+* Grant reporting
+* Funder reporting
+* Partner updates
+* Organization reporting
+* Spreadsheet analysis
+* Environmental impact tracking
+
+---
+
+## Administrative Review
+
+CSR submissions are stored as WordPress CSR report records.
+
+EcoServants® administrators can review submitted reports through the WordPress administrative environment.
+
+CSR v1.2 will further improve the management and review experience by organizing report information into clearer sections and surfacing key environmental impact metrics.
+
+---
+
+## Wall of Fame Integration
+
+The current production CSR workflow includes integration with the EcoServants® Wall of Fame experience.
+
+This provides a foundation for future participant recognition and impact-based engagement features.
+
+---
+
+# Data Architecture
+
+CSR reports use the existing WordPress CSR report structure.
+
+The project intentionally preserves historical CSR data and existing field names wherever practical while expanding the reporting experience.
+
+Repository documentation includes:
+
+* `CSR_DATA_DICTIONARY.md`
+* `CSR_PROCESS_MAP_FOR_INTERNS.md`
+* `PROCESS_MAPPING.md`
+* `CSR_ROADMAP.md`
+* Guided-flow architecture documentation
+* Implementation notes
+
+Developers should review these documents before altering field names, storage conventions, or report-processing logic.
+
+Backward compatibility with existing CSR reports is an important project requirement.
+
+---
+
+# Current Development Roadmap
+
+Development is now divided into two major milestones.
+
+---
+
+## CSR v1.2 — Production Reporting
+
+CSR v1.2 focuses on completing and hardening the core environmental reporting system.
+
+Current areas of development include:
+
+### Waste Subcategory UX
+
+Complete contextual waste-subcategory selection after users select major waste categories.
+
+### Mobile Usability & Responsive QA
+
+Complete production testing and refinement across phones, tablets, and desktop responsive layouts.
+
+### CSR Exports
+
+Complete exports for:
+
+* Analysis
+* Grant reporting
+* Funder reporting
+* Partner reporting
+* Organization/team data
+* Date-range reporting
+
+### Visual Asset System
+
+Standardize category icons and reusable visual assets.
+
+### Administrative Review
+
+Improve the CSR administrative review and management workflow.
+
+### Validation & Data Integrity
+
+Strengthen:
+
+* Required-field validation
+* Numeric validation
+* Conditional validation
+* Server-side validation
+* User-friendly error handling
+* Data integrity protections
+
+### Photo Upload & Review UX
+
+Improve:
+
+* File validation
+* Upload errors
+* Mobile handling
+* Review-screen previews
+* Photo limits
+* Accessibility
+
+### Public Impact Summary
+
+Create a reusable shortcode for displaying selected aggregate CSR impact metrics publicly.
+
+---
+
+# CSR v2.0 — Organizational Impact Platform
+
+CSR v2.0 expands CSR beyond individual environmental reporting into a broader organization and team impact platform.
+
+The milestone includes three major architectural areas.
+
+---
+
+## Organization & Team Reporting Architecture
+
+Standardize organization/team reporting data so reports from the same organization can be reliably grouped and analyzed.
+
+This includes:
+
+* Organization identifiers
+* Team information
+* Participation data
+* Historical compatibility
+* Organization-specific reporting
+* Analytics-ready metadata
+
+---
+
+## Reusable CSR Impact Analytics Layer
+
+Develop a standardized analytics layer capable of aggregating CSR data by:
+
+* Date
+* Month
+* Year
+* Organization
+* Team
+* Reporter
+* Waste category
+* Waste subcategory
+* Pounds collected
+* Participation
+* Restoration activity
+* Number of reports
+
+The goal is to avoid rebuilding calculations separately for every dashboard, export, or shortcode.
+
+---
+
+## Organization CSR Impact Dashboard
+
+Build a first-version organization/team dashboard capable of displaying metrics such as:
+
+* Organization name
+* Total CSR reports
+* Total pounds collected
+* Volunteer participation
+* Category-level impact
+* Restoration activity
+* Recent reports
+* Date-range impact
+* Calendar-year impact
+
+Future enhancements may include:
+
+* Branded impact reports
+* Environmental achievement badges
+* Organization goals
+* Leaderboards
+* Partner recognition
+* Year-over-year comparisons
+* Sponsorship reporting
+* Funder reporting tools
+
+---
+
+# Development Principles
+
+CSR development should follow several core principles.
+
+## Preserve Existing Data
+
+Do not unnecessarily rename or replace existing CSR fields.
+
+Historical CSR reports must remain usable whenever practical.
+
+## Reuse Existing Functionality
+
+Existing reporting, calculation, export, and storage logic should be extended rather than duplicated.
+
+## Mobile First
+
+Environmental reporting frequently happens in the field.
+
+Every major workflow should function reliably on modern mobile devices.
+
+## Data Integrity
+
+Server-side validation and sanitization remain authoritative.
+
+Client-side validation should improve usability but must never be the only protection against invalid submissions.
+
+## Privacy
+
+Public-facing features must not expose private reporter information.
+
+Administrative and public reporting functions should remain appropriately separated.
+
+## Accessibility
+
+CSR interfaces should remain understandable and usable without depending exclusively on:
+
+* Color
+* Icons
+* Animation
+* Hover interactions
+
+Text labels and accessible controls should remain available.
+
+## Expandable Architecture
+
+New features should support future development without forcing existing CSR functionality to be rebuilt.
+
+---
+
+# Repository Milestones
+
+Current GitHub development is organized under:
+
+### CSR v1.2 — Production Reporting
+
+Core reporting UX, validation, mobile QA, exports, administration, visual assets, photo workflow, and public impact presentation.
+
+### CSR v2.0 — Organizational Impact Platform
+
+Organization/team architecture, reusable analytics, and organization impact dashboards.
+
+GitHub issues assigned to these milestones should be treated as the current development source of truth.
+
+---
+
+# Release History
+
+## v1.1.7-guided-interim
+
+**Production synchronization baseline — August 14, 2026**
+
+Major functionality represented in this release includes:
+
+* Guided multi-step CSR reporting
+* Individual, team, and organization reporting paths
+* Category-card interface
+* Local draft saving and restoration
+* Progress navigation
+* Review-before-submit workflow
+* Photo previews and mobile capture support
+* Organization and event metadata
+* Improved submission confirmation
+* Wall of Fame integration
+
+This release brought the GitHub repository back into alignment with the current production CSR implementation.
+
+---
+
+# Installation
+
+CSR is developed as a WordPress plugin.
+
+Typical installation:
+
+1. Download or package the plugin files.
+
+2. Upload the plugin folder to:
+
+   `wp-content/plugins/`
+
+3. Activate the EcoServants® CSR plugin from WordPress.
+
+4. Confirm the appropriate CSR pages and shortcodes are configured.
+
+5. Test a complete CSR submission before deploying changes to production.
+
+Developers should avoid deploying development branches directly to the production website without testing.
+
+---
+
+# Development Workflow
+
+Recommended GitHub workflow:
+
+1. Start from the current `main` branch.
+2. Review the applicable GitHub issue.
+3. Create a feature/fix branch.
+4. Make focused changes.
+5. Test existing CSR reporting functionality.
+6. Submit a pull request.
+7. Reference the applicable issue.
+8. Review before merging into `main`.
+
+Major production states should be tagged through GitHub releases.
+
+---
+
+# Documentation
+
+Developers and interns should review the project documentation before beginning major CSR work.
+
+Important repository files include:
+
+* `README.md`
+* `CSR_ROADMAP.md`
+* `CSR_DATA_DICTIONARY.md`
+* `CSR_PROCESS_MAP_FOR_INTERNS.md`
+* `PROCESS_MAPPING.md`
+* `GUIDED_INTERIM_RELEASE.md`
+* Guided-flow architecture notes
+* Issue-specific implementation notes
+
+The GitHub Issues and Milestones system should be used to determine current unfinished work.
+
+---
+
+# Project Status
+
+CSR is an active EcoServants® environmental technology project.
+
+The system is no longer a prototype or simple digital cleanup form.
+
+Its current development direction is:
+
+**Environmental reporting → structured environmental data → impact analytics → organization reporting → public and partner impact tools**
+
+The long-term goal is to provide EcoServants®, volunteers, community organizations, partners, and funders with reliable tools for documenting and understanding measurable environmental stewardship.
+
+---
+
+# License
+
+This project is proprietary software of the **Ecological Servants Project / EcoServants®**.
+
+It is **not open-source software**.
+
+Use, modification, redistribution, or deployment is governed by the license terms included with the repository.
+
+See:
+
+`license.txt`
+
+for the applicable software license and restrictions.
+
+---
+
+# EcoServants®
+
+**Ecological Servants Project**
+
+Restoring communities. Protecting the planet.
