@@ -196,6 +196,52 @@ This calculation layer will be standardized and expanded through the CSR v2.0 an
 
 ---
 
+## Public CSR Impact Summary Shortcode
+
+`[csr_impact_summary]` displays a public summary of aggregate CSR impact on any
+WordPress page or post. It reuses the existing calculation functions
+(`ecoservants_calculate_totals()` and `ecoservants_get_yearly_totals()`) rather
+than duplicating aggregation logic, so its totals stay consistent with
+`[total_impact]` and `[top_impact]`.
+
+### Usage
+
+```
+[csr_impact_summary]
+[csr_impact_summary year="2026"]
+[csr_impact_summary year="2026" top="6"]
+```
+
+### Attributes
+
+* `year` — optional four-digit calendar year (e.g. `2026`). When set, the summary
+  shows impact for that year only and reports its own report count. When omitted,
+  the summary shows all-time impact.
+* `top` — optional number of top waste categories to display, ranked by weight.
+  Defaults to `4`. Set to `0` to hide the Top Categories section.
+
+### What it shows
+
+* Reports submitted
+* Total material removed (pounds)
+* Participation totals (volunteers)
+* Trees planted, bags collected, and invasive species removed, where available
+* Top waste categories by weight
+* A "no reports yet" message for periods with no data
+
+### Notes
+
+* Only aggregate totals are rendered. No reporter names, emails, locations,
+  notes, post IDs, or other private metadata are ever output.
+* The all-time view uses the site-wide participation basis (which includes the
+  plugin's seeded base volunteer count), so its participation label reads
+  "Volunteers Involved". The per-year view uses only that year's reported
+  volunteers and is labeled "Volunteers This Year".
+* Markup and CSS classes match `[top_impact]`, so the summary inherits the
+  existing EcoServants styling with no additional stylesheet.
+
+---
+
 ## CSR Exports
 
 CSR already contains CSV/export functionality.
