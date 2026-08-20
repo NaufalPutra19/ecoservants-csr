@@ -339,6 +339,9 @@ add_action('wp_enqueue_scripts', 'ecoservants_enqueue_scripts');
 // Include form template and handler
 include plugin_dir_path(__FILE__) . 'form-handler.php';
 
+// Include public CSR impact summary shortcode (Issue #22)
+include plugin_dir_path(__FILE__) . 'csr-impact-summary.php';
+
 // Register shortcode for the form
 function ecoservants_csr_form_shortcode() {
     $submitted = isset($_GET['submitted']) && sanitize_text_field(wp_unslash($_GET['submitted'])) === 'true';
