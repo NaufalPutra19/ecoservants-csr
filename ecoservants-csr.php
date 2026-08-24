@@ -428,7 +428,7 @@ function csr_get_all_category_icons() {
 
 // Enqueue scripts and styles
 function ecoservants_enqueue_scripts() {
-    $version = '1.1.4-new-report-reset';
+    $version = '1.1.5-category-icons';
     wp_enqueue_style('ecoservants-style', plugin_dir_url(__FILE__) . 'assets/css/style.css', array(), $version);
     wp_enqueue_script('ecoservants-carousel', plugin_dir_url(__FILE__) . 'assets/js/carousel.js', array(), $version, true);
     wp_enqueue_script('csr-guided-wrapper', plugin_dir_url(__FILE__) . 'assets/js/csr-guided-wrapper.js', array(), $version, true);
