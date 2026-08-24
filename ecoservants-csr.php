@@ -1470,7 +1470,7 @@ function ecoservants_display_meta_boxes($post) {
         <div class="csr-admin-section-header">
             <h3>♻️ Waste Categories & Subcategories Breakdown</h3>
             <button type="button" class="csr-admin-toggle-btn" onclick="toggleRawCategories(this)">
-                ✏️ Edit All 12 Categories / Raw Inputs
+                ✏️ Edit All Categories / Raw Inputs
             </button>
         </div>
 
