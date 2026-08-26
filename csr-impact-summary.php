@@ -103,6 +103,7 @@ function ecoservants_summary_render_metric($value, $unit, $label, $category_key 
 }
 
 function ecoservants_impact_summary_shortcode($atts = []) {
+    if (function_exists('ecoservants_enqueue_scripts')) { ecoservants_enqueue_scripts(); }
     // Attributes: [csr_impact_summary year="2026" top="4"]
     $atts = shortcode_atts([
         'year' => '',
