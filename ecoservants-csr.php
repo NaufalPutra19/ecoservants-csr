@@ -2,7 +2,7 @@
 /*
 Plugin Name: EcoServants CSR
 Description: A plugin for environmental volunteers to submit Community Site Reports (CSR) after cleanup events.
-Version: 1.1.8-category-icons
+Version: 1.2.0
 By: EcoServants - Thanks to our developers
 Author URI: https://ecoservantsproject.org
 */
@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('ECOSERVANTS_CSR_VERSION')) {
-    define('ECOSERVANTS_CSR_VERSION', '1.1.8-category-icons');
+    define('ECOSERVANTS_CSR_VERSION', '1.2.0');
 }
 
 // Register custom post type for CSR Reports with locked-down capabilities
@@ -446,12 +446,17 @@ function ecoservants_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'ecoservants_enqueue_scripts');
 
-// Enqueue admin styles and icon assets for CSR meta box screens
+// Enqueue admin styles, icon assets, and review console stylesheet
 function ecoservants_admin_enqueue_scripts($hook) {
     global $post_type;
-    if ($post_type === 'csr_report' || (isset($_GET['page']) && strpos($_GET['page'], 'csr') !== false)) {
-        $version = defined('ECOSERVANTS_CSR_VERSION') ? ECOSERVANTS_CSR_VERSION : '1.1.8-category-icons';
+    $is_csr_report = ($post_type === 'csr_report');
+    $page = isset($_GET['page']) ? sanitize_key($_GET['page']) : '';
+    $is_csr_page = ($page && (strpos($page, 'csr') !== false || in_array($page, ['total-impact-metrics', 'csr-yearly-export'], true)));
+
+    if ($is_csr_report || $is_csr_page) {
+        $version = defined('ECOSERVANTS_CSR_VERSION') ? ECOSERVANTS_CSR_VERSION : '1.2.0';
         wp_enqueue_style('ecoservants-admin-style', plugin_dir_url(__FILE__) . 'assets/css/style.css', array(), $version);
+        wp_enqueue_style('ecoservants-admin-review-css', plugin_dir_url(__FILE__) . 'assets/css/admin-review.css', array('ecoservants-admin-style'), $version);
     }
 }
 add_action('admin_enqueue_scripts', 'ecoservants_admin_enqueue_scripts');
@@ -802,22 +807,7 @@ function ecoservants_top_impact_iframe_endpoint() {
     <?php
     exit;
 }
-}
 add_action('init', 'ecoservants_top_impact_iframe_endpoint');
-
-// Enqueue Admin Review Stylesheet
-function ecoservants_admin_enqueue_scripts($hook) {
-    global $post_type;
-    if ($post_type === 'csr_report' || (isset($_GET['page']) && in_array($_GET['page'], ['total-impact-metrics', 'csr-yearly-export'], true))) {
-        wp_enqueue_style(
-            'ecoservants-admin-review-css',
-            plugins_url('assets/css/admin-review.css', __FILE__),
-            [],
-            '1.2.0'
-        );
-    }
-}
-add_action('admin_enqueue_scripts', 'ecoservants_admin_enqueue_scripts');
 
 // Calculate total waste weight (lbs) for a single CSR report post
 function ecoservants_get_post_total_weight($post_id) {
@@ -1029,19 +1019,30 @@ function ecoservants_csr_report_admin_filters($post_type) {
 }
 add_action('restrict_manage_posts', 'ecoservants_csr_report_admin_filters');
 
-// Filter Query callback for reporter type filter
+// Filter and Sort Query callback for CSR reports list view
 function ecoservants_csr_report_filter_query($query) {
     global $pagenow;
     if (is_admin() && $pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'csr_report') {
         if (!empty($_GET['csr_reporter_type_filter'])) {
             $filter_type = sanitize_key($_GET['csr_reporter_type_filter']);
-            $meta_query  = (array) $query->get('meta_query');
+            $meta_query  = $query->get('meta_query');
+            $meta_query  = is_array($meta_query) ? $meta_query : [];
             $meta_query[] = [
                 'key'     => 'csr_reporter_type',
                 'value'   => $filter_type,
                 'compare' => '=',
             ];
             $query->set('meta_query', $meta_query);
+        }
+
+        // Handle sortable column orderby mappings
+        $orderby = $query->get('orderby');
+        if ($orderby === 'csr_date') {
+            $query->set('meta_key', 'csr_date');
+            $query->set('orderby', 'meta_value');
+        } elseif ($orderby === 'csr_volunteers') {
+            $query->set('meta_key', 'csr_volunteers_involved');
+            $query->set('orderby', 'meta_value_num');
         }
     }
 }
@@ -1733,7 +1734,7 @@ function ecoservants_display_meta_boxes($post) {
             if (btn) btn.innerText = '🔒 Hide Raw Category Edit Console';
         } else {
             panel.style.display = 'none';
-            if (btn) btn.innerText = '✏️ Edit All 12 Categories / Raw Inputs';
+            if (btn) btn.innerText = '✏️ Edit All Categories / Raw Inputs';
         }
     }
     </script>
